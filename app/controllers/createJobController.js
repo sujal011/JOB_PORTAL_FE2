@@ -12,19 +12,25 @@ app.controller("CreateJobController", ["$scope", "$http", function($scope, $http
             alert("You must be employer to post the job")
             return
         }
-        $scope.jobData.postedBy = loggedInUser._id;
 
-        $http.post($scope.baseUrl + "/jobs", $scope.jobData)
-            .then(function(response) {
+        const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+        console.log(token);
+        
+        $http.post($scope.baseUrl + "/jobs", $scope.jobData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(function(response) {
             alert("Job created successfully!");
             console.log("Created job:", response.data);
 
             // Optionally, redirect to the jobs page
             window.location.href = "#!/jobs";
-            })
-            .catch(function(error) {
+        })
+        .catch(function(error) {
             alert("Failed to create job: " + (error.message || "Unknown error"));
             console.error(error);
-            });
+        });
     };
 }]);
