@@ -13,8 +13,8 @@ app.controller("ViewApplicationController", ["$scope", "$http", "$routeParams", 
             }
         })
         .then(function(response) {
-            $scope.applications = response.data.applications;
-            $scope.jobTitle = response.data.jobTitle; // Assuming the API returns the job title
+            $scope.applications = response.data;
+            $scope.jobTitle = response.data[0]?.jobTitle || "Job Applications"; 
         })
         .catch(function(error) {
             alert("Failed to fetch applications: " + (error.data.message || "Unknown error"));

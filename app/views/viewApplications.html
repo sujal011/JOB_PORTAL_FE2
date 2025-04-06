@@ -10,7 +10,8 @@
         <!-- List of Applications -->
         <div class="list-group" ng-if="applications.length > 0">
             <div class="list-group-item" ng-repeat="application in applications">
-                <h5 class="mb-1">{{ application.applicantName }}</h5>
+                <h5 class="mb-1">{{ application.applicant.name }}</h5>
+                <p class="mb-1"><strong>Email:</strong> {{ application.applicant.email }}</p>
                 <p class="mb-1"><strong>Status:</strong> 
                     <span class="badge" ng-class="{
                         'bg-success': application.status === 'accepted',
@@ -18,7 +19,7 @@
                         'bg-danger': application.status === 'rejected'
                     }">{{ application.status | uppercase }}</span>
                 </p>
-                <a ng-if="application.resume" href="{{ application.resume }}" target="_blank" class="btn btn-link p-0">View Resume</a>
+                <a ng-if="application.applicant.resume" href="{{ application.applicant.resume }}" target="_blank" class="btn btn-link p-0">View Resume</a>
                 <div class="mt-2">
                     <button class="btn btn-success btn-sm" ng-click="updateStatus(application._id, 'accepted')">Accept</button>
                     <button class="btn btn-danger btn-sm" ng-click="updateStatus(application._id, 'rejected')">Reject</button>

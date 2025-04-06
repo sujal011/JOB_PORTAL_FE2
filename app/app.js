@@ -24,7 +24,7 @@ app.config(["$routeProvider", function($routeProvider) {
             controller: "ProfileController"
         })
         .when("/applications/:jobId", {
-            templateUrl: "app/views/applications.html",
+            templateUrl: "app/views/viewApplications.html",
             controller: "ViewApplicationController"
         })
         .otherwise({
