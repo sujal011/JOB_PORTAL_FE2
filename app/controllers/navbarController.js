@@ -3,7 +3,13 @@ app.controller("NavbarController", ["$scope", '$location',function($scope,$locat
         return $location.path() === viewLocation;
     };
     $scope.isLoggedIn = false;
-    $scope.isLoggedInEmployer = $scope.isEmployer();
+    const loggedInUser = $scope.getLoggedInUser();
+        if (!loggedInUser) {
+            alert("You must be logged in to view jobs.");
+            return;
+        }
+
+    $scope.isEmployer = loggedInUser.role === "employer";
 
     // Check if the user is logged in
     $scope.checkLoginStatus = function() {

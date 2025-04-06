@@ -35,11 +35,11 @@ app.controller("MainController", ["$scope", function($scope) {
         const user = localStorage.getItem("user");
         return user ? JSON.parse(user) : null;
     };
-    $scope.isEmployer = function() {
-        const user = $scope.getLoggedInUser();
-        if (user && user.role === 'employer') {
-            return true;
-        }
-        return false; // Explicitly return false if the user is not an employer
-    }
+    // $scope.isEmployer = function() {
+    //     const user = $scope.getLoggedInUser();
+    //     if (user && user.role === 'employer') {
+    //         return true;
+    //     }
+    //     return false; // Explicitly return false if the user is not an employer
+    // }
 }]);

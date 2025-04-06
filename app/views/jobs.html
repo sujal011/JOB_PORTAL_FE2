@@ -158,6 +158,14 @@
       }
     </style>
   <div id="jobcardid">
+    <!-- Show message if there are no jobs -->
+    <div class="text-center mt-5" ng-if="!jobs || jobs.length === 0">
+        <h4 ng-if="!isEmployer">There are no jobs available.</h4>
+        <div ng-if="isEmployer">
+            <h4>You haven't posted any job</h4>
+            <a href="#!/create-job" class="btn btn-primary btn-sm m-3">Create Job</a>
+        </div>
+    </div>
 
       <!-- Job Listing Card -->
 
@@ -196,7 +204,11 @@
       </div>
       <div class="job-footer">
         <div class="job-date">Posted {{job.createdAt | date:'MMMM d, y h:mm a'}}</div>
-        <button class="btn btn-apply" ng-click="applyForJob(job._id)">Apply Now</button>
+        <button ng-if="!isEmployer" class="btn btn-apply" ng-click="applyForJob(job._id)">Apply Now</button>
+        <div ng-if="isEmployer">
+            <button class="btn btn-danger btn-sm" ng-click="deleteJob(job._id)">Delete</button>
+            <a href="#!/applications/{{ job._id }}" class="btn btn-primary btn-sm">View Applications</a>
+        </div>
       </div>
     </div>
   
@@ -244,6 +256,10 @@
           
           <div class="text-center mb-5">
             <button class="btn btn-apply px-5 py-2" ng-click="applyForJob(selectedJob._id)">Apply for this Position</button>
+            <div ng-if="isEmployer">
+                <button class="btn btn-danger btn-sm" ng-click="deleteJob(job._id)">Delete</button>
+                <a href="#!/applications/{{ job._id }}" class="btn btn-primary btn-sm">View Applications</a>
+            </div>
           </div>
         </div>
       </div>

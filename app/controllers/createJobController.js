@@ -14,8 +14,6 @@ app.controller("CreateJobController", ["$scope", "$http", function($scope, $http
         }
 
         const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
-        console.log(token);
-        
         $http.post($scope.baseUrl + "/jobs", $scope.jobData, {
             headers: {
                 Authorization: `Bearer ${token}`
