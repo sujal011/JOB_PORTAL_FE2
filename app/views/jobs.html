@@ -204,7 +204,9 @@
       </div>
       <div class="job-footer">
         <div class="job-date">Posted {{job.createdAt | date:'MMMM d, y h:mm a'}}</div>
+        <!-- Apply Now button for job seekers -->
         <button ng-if="!isEmployer" class="btn btn-apply" ng-click="applyForJob(job._id)">Apply Now</button>
+        <!-- Delete and View Applications buttons for employers -->
         <div ng-if="isEmployer">
             <button class="btn btn-danger btn-sm" ng-click="deleteJob(job._id)">Delete</button>
             <a href="#!/applications/{{ job._id }}" class="btn btn-primary btn-sm">View Applications</a>

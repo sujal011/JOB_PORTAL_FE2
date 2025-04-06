@@ -49,6 +49,28 @@ app.controller("JobsController", ["$scope", "$http", function($scope, $http) {
         });
     };
 
+    $scope.applyForJob = function(jobId) {
+        console.log("Applied click");
+        
+        const token = document.cookie.split("; ").find(row => row.startsWith("token=")).split("=")[1];
+        $http.post(`${$scope.baseUrl}/applications`, { jobID: jobId }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(function(response) {
+            alert(response.data.message); // Show the success message
+        })
+        .catch(function(error) {
+            // Extract and display the error message from the API response
+            const errorMessage = error.data && error.data.message
+                ? error.data.message
+                : "An unknown error occurred.";
+            alert(`Failed to apply for the job: ${errorMessage}`);
+            console.error("Error details:", error);
+        });
+    };
+
     // Fetch jobs on controller initialization
     $scope.fetchJobs();
 }]);

@@ -19,6 +19,10 @@ app.config(["$routeProvider", function($routeProvider) {
             templateUrl: "app/views/createJob.html",
             controller: "CreateJobController"
         })
+        .when("/profile", {
+            templateUrl: "app/views/profile.html",
+            controller: "ProfileController"
+        })
         .otherwise({
             redirectTo: "/login"
         });
@@ -42,4 +46,20 @@ app.controller("MainController", ["$scope", function($scope) {
     //     }
     //     return false; // Explicitly return false if the user is not an employer
     // }
+}]);
+
+app.directive("fileModel", ["$parse", function($parse) {
+    return {
+        restrict: "A",
+        link: function(scope, element, attrs) {
+            const model = $parse(attrs.fileModel);
+            const modelSetter = model.assign;
+
+            element.bind("change", function() {
+                scope.$apply(function() {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
 }]);
