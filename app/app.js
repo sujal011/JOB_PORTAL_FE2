@@ -23,6 +23,10 @@ app.config(["$routeProvider", function($routeProvider) {
             templateUrl: "app/views/profile.html",
             controller: "ProfileController"
         })
+        .when("/applications/:jobId", {
+            templateUrl: "app/views/applications.html",
+            controller: "ViewApplicationController"
+        })
         .otherwise({
             redirectTo: "/login"
         });
