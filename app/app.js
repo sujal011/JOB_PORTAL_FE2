@@ -33,7 +33,7 @@ app.config(["$routeProvider", function($routeProvider) {
 }]);
 
 app.controller("MainController", ["$scope", function($scope) {
-    $scope.baseUrl = "http://localhost:3000/api";
+    $scope.baseUrl = "https://job-portal-be-jwgm.onrender.com/api";
 
     $scope.logout = function() {
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
