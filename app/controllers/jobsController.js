@@ -50,10 +50,9 @@ app.controller("JobsController", ["$scope", "$http", function($scope, $http) {
     };
 
     $scope.applyForJob = function(jobId) {
-        console.log("Applied click");
         
         const token = document.cookie.split("; ").find(row => row.startsWith("token=")).split("=")[1];
-        $http.post(`${$scope.baseUrl}/applications`, { jobID: jobId }, {
+        $http.post(`${$scope.baseUrl}/applications`, { jobId: jobId }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
